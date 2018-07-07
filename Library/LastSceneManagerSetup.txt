@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/scene/y_load.unity
+- path: Assets/scene/y_task.unity
   isLoaded: 1
   isActive: 1

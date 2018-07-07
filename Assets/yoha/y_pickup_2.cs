@@ -1,11 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 
 public class y_pickup_2 : MonoBehaviour {
+	const int SITASIKUNAI = 0;//親しくない
+	const int INDOOR = 1;//インドア
+	const int NEGATHIBU = 2;//ネガティブ
+	const int DEZAIN = 3;//デザイン派
+	const int LEVEL_MAX=3;
+
 	public GameObject tack;
 
 	public AudioSource tap;
@@ -22,30 +29,30 @@ public class y_pickup_2 : MonoBehaviour {
 	public string[] distance;
 	public GameObject[] coment;
 
-	const int SITASIKUNAI = 0;//親しくない
-	const int INDOOR = 1;//インドア
-	const int NEGATHIBU = 2;//ネガティブ
-	const int DEZAIN = 3;//デザイン派
+	//CSV読み込み関係
+	public List<string> file_name;
+	int height;
+	char[] csvDatas=new char[10000];
 
-	public List<string> SITASIKUNAI_1 = new List<string>();
-	public List<string> INDOOR_1 = new List<string>();
-	public List<string> INDOOR_2 = new List<string>();
-	public List<string> INDOOR_3 = new List<string>();
-	public List<string> OUTDOOR_1 = new List<string>();
-	public List<string> OUTDOOR_2 = new List<string>();
-	public List<string> OUTDOOR_3 = new List<string>();
-	public List<string> NEGATHIBU_1 = new List<string>();
-	public List<string> NEGATHIBU_2 = new List<string>();
-	public List<string> NEGATHIBU_3 = new List<string>();
-	public List<string> POJITHIBU_1 = new List<string>();
-	public List<string> POJITHIBU_2 = new List<string>();
-	public List<string> POJITHIBU_3 = new List<string>();
-	public List<string> DEZAIN_1 = new List<string>();
-	public List<string> DEZAIN_2 = new List<string>();
-	public List<string> DEZAIN_3 = new List<string>();
-	public List<string> ZITUYOUTEKI_1 = new List<string>();
-	public List<string> ZITUYOUTEKI_2 = new List<string>();
-	public List<string> ZITUYOUTEKI_3 = new List<string>();
+	//課題の文言
+	List<string> SITASIKUNAI_1 = new List<string>();
+	List<List<string>> INDOOR_text = new List<List<string>>();
+
+	List<string> OUTDOOR_1 = new List<string>();
+	List<string> OUTDOOR_2 = new List<string>();
+	List<string> OUTDOOR_3 = new List<string>();
+	List<string> NEGATHIBU_1 = new List<string>();
+	List<string> NEGATHIBU_2 = new List<string>();
+	List<string> NEGATHIBU_3 = new List<string>();
+	List<string> POJITHIBU_1 = new List<string>();
+	List<string> POJITHIBU_2 = new List<string>();
+	List<string> POJITHIBU_3 = new List<string>();
+	List<string> DEZAIN_1 = new List<string>();
+	List<string> DEZAIN_2 = new List<string>();
+	List<string> DEZAIN_3 = new List<string>();
+	List<string> ZITUYOUTEKI_1 = new List<string>();
+	List<string> ZITUYOUTEKI_2 = new List<string>();
+	List<string> ZITUYOUTEKI_3 = new List<string>();
 
 	int num;
 	static public int save_num;
@@ -55,17 +62,9 @@ public class y_pickup_2 : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
-		if (Get_result.relation == 10) {
-			Instantiate (back [Get_result.relation], new Vector2 (0, 1.5f), Quaternion.identity);
-			Instantiate (coment [Get_result.relation], new Vector2 (0, -0.5f), Quaternion.identity);
-			GameObject.Find ("dis").GetComponent<Text> ().text = distance [Get_result.relation];
-		}
-		else {
-			Instantiate (back [Get_result.relation], new Vector2 (0, 1.5f), Quaternion.identity);
-			Instantiate (coment [Get_result.relation], new Vector2 (0, -0.5f), Quaternion.identity);
-			GameObject.Find ("dis").GetComponent<Text> ().text = distance [Get_result.relation];
-		}
+		/*Instantiate (back [Get_result.relation], new Vector2 (0, 1.5f), Quaternion.identity);
+		Instantiate (coment [Get_result.relation], new Vector2 (0, -0.5f), Quaternion.identity);
+		GameObject.Find ("dis").GetComponent<Text> ().text = distance [Get_result.relation];
 
 		//挿絵をセレクト
 		switch(Get_result.relation/2){
@@ -111,7 +110,8 @@ public class y_pickup_2 : MonoBehaviour {
 			txt = "告白をしよう";
 		}
 
-		tack.GetComponent<Text> ().text = tack.GetComponent<Text> ().text + txt;
+		tack.GetComponent<Text> ().text = tack.GetComponent<Text> ().text + txt;*/
+		Input_text ();
 	}
 
 	// Update is called once per frame
@@ -119,7 +119,44 @@ public class y_pickup_2 : MonoBehaviour {
 
 	}
 
-	void o(){
+	//テキスト読み込みは確認ずみ
+	void Input_text(){
+		Load_Text (file_name[0], ref INDOOR_text);
+		Debug.Log (INDOOR_text[0][2]);
+	}
+
+	//CSV読み込み
+	//一回通ると一つの性格分の文章を全部入れる
+	void Load_Text(string file_name,ref List<List<string>> text_box){
+		string text="";
+		TextAsset csv = Resources.Load("CSV/" + file_name) as TextAsset;
+		StringReader reader = new StringReader(csv.text);
+		List<string> text_all = new List<string>();
+
+		while (reader.Peek() > -1) {
+			reader.ReadBlock (csvDatas,0,csvDatas.Length);
+		}
+
+		foreach(char moji in csvDatas){
+			if (moji == '\n')continue;
+			//文章の終わりに、リストに追加
+			if (moji == '/'||moji == '+') {
+				text_all.Add (text);
+				text = "";
+				//全ての文言が入っているリストに追加
+				if (moji == '+') {
+					text_box.Add (text_all);
+					break;
+				}
+				continue;
+			}
+			else {
+				text += moji;
+			}
+		}
+	}
+
+	/*void o(){
 		this.tap.Play ();
 	}
 
@@ -375,6 +412,6 @@ public class y_pickup_2 : MonoBehaviour {
 			break;
 		}
 		return "unko";
-	}
+	}*/
 
 }

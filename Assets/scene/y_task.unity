@@ -400,8 +400,8 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 696581360}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 109.5, y: 194.5, z: 0}
-  m_LocalScale: {x: 0.5832084, y: 0.5832084, z: 0.5832084}
+  m_LocalPosition: {x: 216, y: 384, z: 0}
+  m_LocalScale: {x: 1.1514243, y: 1.1514243, z: 1.1514243}
   m_Children:
   - {fileID: 1620583155}
   - {fileID: 2022183414}
@@ -989,6 +989,7 @@ GameObject:
   - component: {fileID: 1980257465}
   - component: {fileID: 1980257464}
   - component: {fileID: 1980257467}
+  - component: {fileID: 1980257468}
   m_Layer: 0
   m_Name: unko
   m_TagString: Untagged
@@ -1192,6 +1193,32 @@ MonoBehaviour:
   - "\u30DB\u30FC\u30E0\u30BB\u30F3\u30BF\u30FC\u306B\u4E00\u7DD2\u306B\u884C\u3053\u3046 "
   - "\u5BB6\u5177\u5E97\u306B\u4E00\u7DD2\u306B\u884C\u3053\u3046 "
   - "\u66F8\u5E97\u306B\u4E00\u7DD2\u306B\u884C\u3053\u3046"
+  ija: {r: 0, g: 0, b: 0, a: 0}
+--- !u!114 &1980257468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1980257463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61b891b466988be46b35c32e07961b36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tack: {fileID: 0}
+  tap: {fileID: 0}
+  last_tap: {fileID: 0}
+  one: {fileID: 0}
+  two: {fileID: 0}
+  three: {fileID: 0}
+  four: {fileID: 0}
+  five: {fileID: 0}
+  last: {fileID: 0}
+  back: []
+  distance: []
+  coment: []
+  file_name:
+  - momomo
   ija: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &2022183413 stripped
 GameObject:
