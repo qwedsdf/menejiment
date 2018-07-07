@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 
-public class y_pickup : MonoBehaviour {
+public class y_pickup_2 : MonoBehaviour {
 	public GameObject tack;
 
 	public AudioSource tap;
@@ -113,7 +113,7 @@ public class y_pickup : MonoBehaviour {
 
 		tack.GetComponent<Text> ().text = tack.GetComponent<Text> ().text + txt;
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 
@@ -124,7 +124,7 @@ public class y_pickup : MonoBehaviour {
 	}
 
 	public void push_yes(){
-		
+
 		Get_result.relation++;
 		//DontDestroyOnLoad (GameObject.Find("unko"));
 		if (Get_result.relation == 11) {
@@ -376,5 +376,5 @@ public class y_pickup : MonoBehaviour {
 		}
 		return "unko";
 	}
-		
+
 }

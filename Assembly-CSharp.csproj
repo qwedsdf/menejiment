@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{3CC532B5-2E19-EBA2-ED55-797EC3C096C3}</ProjectGuid>
+    <ProjectGuid>{12F86C76-4419-25A1-627C-2E96BCB2D9FB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -58,6 +58,7 @@
      <Compile Include="Assets\yoha\title\y_lib.cs" />
      <Compile Include="Assets\yoha\title\y_title.cs" />
      <Compile Include="Assets\yoha\y_pickup.cs" />
+     <Compile Include="Assets\yoha\y_pickup_2.cs" />
      <None Include="Assets\yoha\Resources\CSV\momomo.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
