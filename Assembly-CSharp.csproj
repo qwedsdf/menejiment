@@ -59,7 +59,26 @@
      <Compile Include="Assets\yoha\title\y_title.cs" />
      <Compile Include="Assets\yoha\y_pickup.cs" />
      <Compile Include="Assets\yoha\y_pickup_2.cs" />
+     <None Include="Assets\Resources\CSV\functionlike1.txt" />
+     <None Include="Assets\Resources\CSV\indoor1.txt" />
+     <None Include="Assets\Resources\CSV\nofrends0.txt" />
+     <None Include="Assets\Resources\CSV\negative0.txt" />
      <None Include="Assets\Resources\CSV\momomo.txt" />
+     <None Include="Assets\Resources\CSV\functionlike0.txt" />
+     <None Include="Assets\Resources\CSV\outdoor0.txt" />
+     <None Include="Assets\Resources\CSV\indoor0.txt" />
+     <None Include="Assets\Resources\CSV\functionlike2.txt" />
+     <None Include="Assets\Resources\CSV\outdoor2.txt" />
+     <None Include="Assets\Resources\CSV\indoor2.txt" />
+     <None Include="Assets\Resources\CSV\design2.txt" />
+     <None Include="Assets\Resources\CSV\design1.txt" />
+     <None Include="Assets\Resources\CSV\design0.txt" />
+     <None Include="Assets\Resources\CSV\outdoor1.txt" />
+     <None Include="Assets\Resources\CSV\positive2.txt" />
+     <None Include="Assets\Resources\CSV\positive1.txt" />
+     <None Include="Assets\Resources\CSV\negative2.txt" />
+     <None Include="Assets\Resources\CSV\positive0.txt" />
+     <None Include="Assets\Resources\CSV\negative1.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

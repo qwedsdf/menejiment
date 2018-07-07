@@ -1218,7 +1218,13 @@ MonoBehaviour:
   distance: []
   coment: []
   file_name:
-  - momomo
+  - nofrends
+  - indoor
+  - negative
+  - design
+  - outdoor
+  - positive
+  - functionlike
   ija: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &2022183413 stripped
 GameObject:

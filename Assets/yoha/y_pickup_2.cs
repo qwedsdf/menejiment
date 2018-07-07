@@ -11,6 +11,9 @@ public class y_pickup_2 : MonoBehaviour {
 	const int INDOOR = 1;//インドア
 	const int NEGATHIBU = 2;//ネガティブ
 	const int DEZAIN = 3;//デザイン派
+	const int OUTDOOR = 4;//アウトドア
+	const int POJITHIBU = 5;//ポジティブ
+	const int ZITUYOUTEKI = 6;//機能派
 	const int LEVEL_MAX=3;
 
 	public GameObject tack;
@@ -34,25 +37,9 @@ public class y_pickup_2 : MonoBehaviour {
 	int height;
 	char[] csvDatas=new char[10000];
 
-	//課題の文言
-	List<string> SITASIKUNAI_1 = new List<string>();
-	List<List<string>> INDOOR_text = new List<List<string>>();
+	//課題の文言 All_text[種類][レベル][文言の番号]
+	List<List<List<string>>> All_text = new List<List<List<string>>>();
 
-	List<string> OUTDOOR_1 = new List<string>();
-	List<string> OUTDOOR_2 = new List<string>();
-	List<string> OUTDOOR_3 = new List<string>();
-	List<string> NEGATHIBU_1 = new List<string>();
-	List<string> NEGATHIBU_2 = new List<string>();
-	List<string> NEGATHIBU_3 = new List<string>();
-	List<string> POJITHIBU_1 = new List<string>();
-	List<string> POJITHIBU_2 = new List<string>();
-	List<string> POJITHIBU_3 = new List<string>();
-	List<string> DEZAIN_1 = new List<string>();
-	List<string> DEZAIN_2 = new List<string>();
-	List<string> DEZAIN_3 = new List<string>();
-	List<string> ZITUYOUTEKI_1 = new List<string>();
-	List<string> ZITUYOUTEKI_2 = new List<string>();
-	List<string> ZITUYOUTEKI_3 = new List<string>();
 
 	int num;
 	static public int save_num;
@@ -121,39 +108,48 @@ public class y_pickup_2 : MonoBehaviour {
 
 	//テキスト読み込みは確認ずみ
 	void Input_text(){
-		Load_Text (file_name[0], ref INDOOR_text);
-		Debug.Log (INDOOR_text[0][2]);
+		foreach(string name in file_name){
+			Load_Text (name, ref All_text);
+		}
 	}
 
 	//CSV読み込み
 	//一回通ると一つの性格分の文章を全部入れる
-	void Load_Text(string file_name,ref List<List<string>> text_box){
+	void Load_Text(string file_name,ref List<List<List<string>>> all_text_box){
 		string text="";
-		TextAsset csv = Resources.Load("CSV/" + file_name) as TextAsset;
-		StringReader reader = new StringReader(csv.text);
-		List<string> text_all = new List<string>();
+		List<List<string>> text_box = new List<List<string>>();
+		int loop_num = LEVEL_MAX;
+		if (all_text_box.Count == 0)loop_num = 1;
 
-		while (reader.Peek() > -1) {
-			reader.ReadBlock (csvDatas,0,csvDatas.Length);
-		}
+		for (int i = 0; i < loop_num; i++) {
+			string _file_name="CSV/" + file_name + i.ToString();
+			TextAsset csv = Resources.Load( _file_name) as TextAsset;
+			StringReader reader = new StringReader(csv.text);
+			List<string> text_all = new List<string>();
 
-		foreach(char moji in csvDatas){
-			if (moji == '\n')continue;
-			//文章の終わりに、リストに追加
-			if (moji == '/'||moji == '+') {
-				text_all.Add (text);
-				text = "";
-				//全ての文言が入っているリストに追加
-				if (moji == '+') {
-					text_box.Add (text_all);
-					break;
+			while (reader.Peek() > -1) {
+				reader.ReadBlock (csvDatas,0,csvDatas.Length);
+			}
+				
+			foreach(char moji in csvDatas){
+				if (moji == '\n')continue;
+				//文章の終わりに、リストに追加
+				if (moji == '/'||moji == '+') {
+					text_all.Add (text);
+					text = "";
+					//全ての文言が入っているリストに追加
+					if (moji == '+') {
+						text_box.Add (text_all);
+						break;
+					}
+					continue;
 				}
-				continue;
-			}
-			else {
-				text += moji;
+				else {
+					text += moji;
+				}
 			}
 		}
+		all_text_box.Add (text_box);
 	}
 
 	/*void o(){
@@ -215,69 +211,30 @@ public class y_pickup_2 : MonoBehaviour {
 				lnum = Random.Range (0, SITASIKUNAI_1.Count);
 			}while(save_lnum == lnum);
 			save_lnum = lnum;
-			txd=SITASIKUNAI_1 [lnum];
-			SITASIKUNAI_1 [lnum] = "";
+			txd=All_text[SITASIKUNAI][0] [lnum];
 			return txd;
 		}
 		switch(num){
 		//インドアかアウトドアか
 		case INDOOR:
 			if (Get_result.indoor) {
-				switch(level){
-				case 1:
-					do{
-						lnum = Random.Range (0, INDOOR_1.Count);
-					}while(save_lnum == lnum);
-					save_lnum = lnum;
-					txd=INDOOR_1 [lnum];
-					INDOOR_1 [lnum] = "";
-					return txd;
-				case 2:
-					do{
-						lnum = Random.Range (0, INDOOR_2.Count);
-					}while(save_lnum == lnum);
-					save_lnum = lnum;
-					txd=INDOOR_2 [lnum];
-					INDOOR_2 [lnum] = "";
-					return txd;
-				case 3:
-					do{
-						lnum = Random.Range (0, INDOOR_3.Count);
-					}while(save_lnum == lnum);
-					save_lnum = lnum;
-					txd=INDOOR_3 [lnum];
-					INDOOR_3 [lnum] = "";
-					return txd;
-				}
+				List<List<string>> text_box = new List<List<string>>();
+				do{
+				///////////要素の最大値をどーやって求めるか考えよう///////////////
+					lnum = Random.Range (0, INDOOR_1.Count);
+				}while(save_lnum == lnum);
+				save_lnum = lnum;
+				txd=All_text[INDOOR][level-1] [lnum];
+				return txd;
 			}
 
 			else {
-				switch(level){
-				case 1:
-					do{
-						lnum = Random.Range (0, OUTDOOR_1.Count);
-					}while(save_lnum == lnum);
-					save_lnum = lnum;
-					txd=OUTDOOR_1 [lnum];
-					OUTDOOR_1 [lnum] = "";
-					return txd;
-				case 2:
-					do{
-						lnum = Random.Range (0, OUTDOOR_2.Count);
-					}while(save_lnum == lnum);
-					save_lnum = lnum;
-					txd=OUTDOOR_2 [lnum];
-					OUTDOOR_2 [lnum] = "";
-					return txd;
-				case 3:
-					do{
-						lnum = Random.Range (0, OUTDOOR_3.Count);
-					}while(save_lnum == lnum);
-					save_lnum = lnum;
-					txd=OUTDOOR_3 [lnum];
-					OUTDOOR_3 [lnum] = "";
-					return txd;
-				}
+				do{
+					lnum = Random.Range (0, OUTDOOR.Count);
+				}while(save_lnum == lnum);
+				save_lnum = lnum;
+				txd=All_text[OUTDOOR][level-1] [lnum];
+				return txd;
 			}
 			break;
 

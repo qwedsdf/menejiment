@@ -136,7 +136,7 @@ public class y_pickup : MonoBehaviour {
 		else {
 			o ();
 			StartCoroutine(Checking( ()=>{
-				SceneManager.LoadScene ("load");
+				SceneManager.LoadScene ("y_load");
 			} ));
 		}
 	}
@@ -145,7 +145,7 @@ public class y_pickup : MonoBehaviour {
 	public void push_no(){
 		o ();
 		StartCoroutine(Checking( ()=>{
-			SceneManager.LoadScene ("load");
+			SceneManager.LoadScene ("y_load");
 		} ));
 	}
 

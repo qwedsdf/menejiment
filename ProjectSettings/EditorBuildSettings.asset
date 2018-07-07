@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/scene/title.unity
+    path: Assets/scene/y_title.unity
     guid: 906f6dfb0c23d0846b5c65ea4576fc6d
   - enabled: 1
     path: Assets/scene/N_ready.unity
@@ -18,5 +18,5 @@ EditorBuildSettings:
     path: Assets/scene/y_task.unity
     guid: 25bf871df44e0724bbb6c69274180931
   - enabled: 1
-    path: Assets/scene/load.unity
+    path: Assets/scene/y_load.unity
     guid: 8b47b2d485671d84b9ea2dc3fa7b2e31
