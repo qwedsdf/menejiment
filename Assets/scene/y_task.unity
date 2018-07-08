@@ -1205,18 +1205,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61b891b466988be46b35c32e07961b36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tack: {fileID: 0}
-  tap: {fileID: 0}
-  last_tap: {fileID: 0}
-  one: {fileID: 0}
-  two: {fileID: 0}
-  three: {fileID: 0}
-  four: {fileID: 0}
-  five: {fileID: 0}
-  last: {fileID: 0}
-  back: []
-  distance: []
-  coment: []
+  tack: {fileID: 2022183413}
+  tap: {fileID: 1078571690}
+  last_tap: {fileID: 630407627}
+  face:
+  - {fileID: 1354007761854184, guid: 3b5a9172e67fda2439a9f18ae535b8d8, type: 2}
+  - {fileID: 1063920342392958, guid: 88bf2210ab0e81c4d86f6d420a1ea65f, type: 2}
+  - {fileID: 1221274792170110, guid: f06eed72095173043af5cc02da20d6e4, type: 2}
+  - {fileID: 1360830837094992, guid: 5e2c5abf345827946804c2a70045b9b0, type: 2}
+  - {fileID: 1272522807762630, guid: 7cd0350f2ab15974eb2f6d2f8167c157, type: 2}
+  - {fileID: 1007591391900434, guid: 7cd47b8c399209b4985ec37d81fbb601, type: 2}
+  back:
+  - {fileID: 1613105473192976, guid: 2f9a8f9ed84768241bbdef1aeb27dc20, type: 2}
+  - {fileID: 1885236376726738, guid: 2446202e71511df409d5b45e9e8218e2, type: 2}
+  - {fileID: 1205443450944010, guid: a0cbe27ce02837b45a4af3c846e8fc3f, type: 2}
+  - {fileID: 1426059708517682, guid: c8348e738f7c69f4fb284d4bdd4d2222, type: 2}
+  - {fileID: 1971781136321776, guid: ea35847a8a1a69040865396880efa95d, type: 2}
+  - {fileID: 1256699024950988, guid: 8dd847bf68b91754eb840e7fc7a26d47, type: 2}
+  - {fileID: 1922431918848064, guid: 19da21203f1842245be642ba35e1183f, type: 2}
+  - {fileID: 1904348237205906, guid: d06d59609ad8e7348bc44557e86fd28f, type: 2}
+  - {fileID: 1453157987144778, guid: 1d7bf55f22e05aa4ab6e6de0b8c9e4f2, type: 2}
+  - {fileID: 1199567402996772, guid: e631f1f16a2daec4683b13ad21695589, type: 2}
+  - {fileID: 1669221819183638, guid: 3188c4c6d96e5cc41a918c832fa5c3cc, type: 2}
+  distance:
+  - a
+  - a
+  - a
+  - a
+  - a
+  - a
+  - a
+  - a
+  - a
+  - a
+  - a
+  coment:
+  - {fileID: 1228191955588782, guid: 1b0a5879ebfc8114394514abc8a690ff, type: 2}
+  - {fileID: 1591831689111534, guid: 15451cdf5ee913c408a63cea53718c7c, type: 2}
+  - {fileID: 1684886574377314, guid: 3cc4a0723cbefa34bb78b58c2c94c78c, type: 2}
+  - {fileID: 1623632634817902, guid: 959d0b7e2e0b362438a32645f7712f2a, type: 2}
+  - {fileID: 1725836778718244, guid: 359d849a56a91a34792863fd842e8ea0, type: 2}
+  - {fileID: 1495640136029964, guid: 55c4be2986c4dfe4d8514dfb53bbf45c, type: 2}
+  - {fileID: 1101222616070322, guid: bd0d2e8b6b6b2ee4bab6ddfb1490258e, type: 2}
+  - {fileID: 1603798446927470, guid: b884a3ad39ed4a94da5c39fea7edb382, type: 2}
+  - {fileID: 1801958846341482, guid: c87bd02abbdb2424f93924da6fa1a1e1, type: 2}
+  - {fileID: 1571125675179118, guid: f33aaeae24590e8498d46334338b8893, type: 2}
+  - {fileID: 1821795271052936, guid: f56ef3df03b60a64abc572ec8dd39846, type: 2}
   file_name:
   - nofrends
   - indoor

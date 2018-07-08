@@ -21,12 +21,8 @@ public class y_pickup_2 : MonoBehaviour {
 	public AudioSource tap;
 	public AudioSource last_tap;
 
-	public GameObject one;
-	public GameObject two;
-	public GameObject three;
-	public GameObject four;
-	public GameObject five;
-	public GameObject last;
+	public GameObject[] face;
+
 
 	public GameObject[] back;
 	public string[] distance;
@@ -34,11 +30,12 @@ public class y_pickup_2 : MonoBehaviour {
 
 	//CSV読み込み関係
 	public List<string> file_name;
-	int height;
 	char[] csvDatas=new char[10000];
 
 	//課題の文言 All_text[種類][レベル][文言の番号]
 	List<List<List<string>>> All_text = new List<List<List<string>>>();
+
+	List<List<int>> size = new List<List<int>>();
 
 
 	int num;
@@ -49,31 +46,20 @@ public class y_pickup_2 : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		/*Instantiate (back [Get_result.relation], new Vector2 (0, 1.5f), Quaternion.identity);
+		
+	}
+
+	void OnEnable(){
+		format ();
+	}
+
+	void format(){
+		Instantiate (back [Get_result.relation], new Vector2 (0, 1.5f), Quaternion.identity);
 		Instantiate (coment [Get_result.relation], new Vector2 (0, -0.5f), Quaternion.identity);
 		GameObject.Find ("dis").GetComponent<Text> ().text = distance [Get_result.relation];
 
-		//挿絵をセレクト
-		switch(Get_result.relation/2){
-		case 0:
-			Instantiate (one,new Vector2(0, -2f), Quaternion.identity);
-			break;
-		case 1:
-			Instantiate (two,new Vector2(0, -2f), Quaternion.identity);
-			break;
-		case 2:
-			Instantiate (three,new Vector2(0, -2f), Quaternion.identity);
-			break;
-		case 3:
-			Instantiate (four,new Vector2(0, -2f), Quaternion.identity);
-			break;
-		case 4:
-			Instantiate (five,new Vector2(0, -2f), Quaternion.identity);
-			break;
-		case 5:
-			Instantiate (last,new Vector2(0, -2f), Quaternion.identity);
-			break;
-		}
+		//女の子をセレクト
+		Instantiate (face[Get_result.relation/2],new Vector2(0, -2f), Quaternion.identity);
 
 		//出す課題の番号をランダムで選ぶ
 		do{
@@ -97,7 +83,7 @@ public class y_pickup_2 : MonoBehaviour {
 			txt = "告白をしよう";
 		}
 
-		tack.GetComponent<Text> ().text = tack.GetComponent<Text> ().text + txt;*/
+		tack.GetComponent<Text> ().text = tack.GetComponent<Text> ().text + txt;
 		Input_text ();
 	}
 
@@ -118,6 +104,7 @@ public class y_pickup_2 : MonoBehaviour {
 	void Load_Text(string file_name,ref List<List<List<string>>> all_text_box){
 		string text="";
 		List<List<string>> text_box = new List<List<string>>();
+		List<int> _size = new List<int>();
 		int loop_num = LEVEL_MAX;
 		if (all_text_box.Count == 0)loop_num = 1;
 
@@ -139,6 +126,7 @@ public class y_pickup_2 : MonoBehaviour {
 					text = "";
 					//全ての文言が入っているリストに追加
 					if (moji == '+') {
+						_size.Add (text_all.Count);
 						text_box.Add (text_all);
 						break;
 					}
@@ -149,13 +137,15 @@ public class y_pickup_2 : MonoBehaviour {
 				}
 			}
 		}
+		size.Add (_size);
 		all_text_box.Add (text_box);
 	}
 
-	/*void o(){
+	void o(){
 		this.tap.Play ();
 	}
 
+	//やったを押した場合
 	public void push_yes(){
 
 		Get_result.relation++;
@@ -174,7 +164,7 @@ public class y_pickup_2 : MonoBehaviour {
 		}
 	}
 
-
+	//やってない場合
 	public void push_no(){
 		o ();
 		StartCoroutine(Checking( ()=>{
@@ -193,6 +183,7 @@ public class y_pickup_2 : MonoBehaviour {
 		}
 	}
 
+	//音が鳴り終わったら戻る
 	private IEnumerator lChecking (functionType callback) {
 		while(true) {
 			yield return new WaitForFixedUpdate();
@@ -203,172 +194,77 @@ public class y_pickup_2 : MonoBehaviour {
 		}
 	}
 
+	//文言をテキストにセットする
 	string SetPos(){
 		int lnum;
 		string txd;
 		if (level == 0) {
-			do{
-				lnum = Random.Range (0, SITASIKUNAI_1.Count);
-			}while(save_lnum == lnum);
+			do {
+				lnum = Random.Range (0, 0);
+			} while(save_lnum == lnum);
 			save_lnum = lnum;
-			txd=All_text[SITASIKUNAI][0] [lnum];
+			txd = All_text [SITASIKUNAI] [0] [lnum];
 			return txd;
 		}
-		switch(num){
+		switch (num) {
 		//インドアかアウトドアか
 		case INDOOR:
 			if (Get_result.indoor) {
-				List<List<string>> text_box = new List<List<string>>();
-				do{
-				///////////要素の最大値をどーやって求めるか考えよう///////////////
-					lnum = Random.Range (0, INDOOR_1.Count);
-				}while(save_lnum == lnum);
+				do {
+					lnum = Random.Range (0, size [INDOOR] [level - 1]);
+				} while(save_lnum == lnum);
 				save_lnum = lnum;
-				txd=All_text[INDOOR][level-1] [lnum];
+				txd = All_text [INDOOR] [level - 1] [lnum];
 				return txd;
-			}
-
-			else {
-				do{
-					lnum = Random.Range (0, OUTDOOR.Count);
-				}while(save_lnum == lnum);
+			} else {
+				do {
+					lnum = Random.Range (0, size [OUTDOOR] [level - 1]);
+				} while(save_lnum == lnum);
 				save_lnum = lnum;
-				txd=All_text[OUTDOOR][level-1] [lnum];
+				txd = All_text [OUTDOOR] [level - 1] [lnum];
 				return txd;
 			}
 			break;
 
-			//ネガティブかポジティブか
+		//ネガティブかポジティブか
 		case NEGATHIBU:
 			if (Get_result.negative) {
-				switch(level){
-				case 1:
-					do{
-						lnum = Random.Range (0, NEGATHIBU_1.Count);
-					}while(save_lnum == lnum);
-					save_lnum = lnum;
-					txd=NEGATHIBU_1 [lnum];
-					NEGATHIBU_1 [lnum] = "";
-					return txd;
-				case 2:
-					do{
-						lnum = Random.Range (0, NEGATHIBU_2.Count);
-					}while(save_lnum == lnum);
-					save_lnum = lnum;
-					txd=NEGATHIBU_2 [lnum];
-					NEGATHIBU_2 [lnum] = "";
-					return txd;
-				case 3:
-					do{
-						lnum = Random.Range (0, NEGATHIBU_3.Count);
-					}while(save_lnum == lnum);
-					save_lnum = lnum;
-
-					txd=NEGATHIBU_3 [lnum];
-					NEGATHIBU_3 [lnum] = "";
-					return txd;
-				}
-			}
-			else {
-				switch(level){
-				case 1:
-					do{
-						lnum = Random.Range (0, POJITHIBU_1.Count);
-					}while(save_lnum == lnum);
-					save_lnum = lnum;
-
-					txd=POJITHIBU_1 [lnum];
-					POJITHIBU_1 [lnum] = "";
-					return txd;
-				case 2:
-					do{
-						lnum = Random.Range (0, POJITHIBU_2.Count);
-					}while(save_lnum == lnum);
-					save_lnum = lnum;
-
-					txd=POJITHIBU_2 [lnum];
-					POJITHIBU_2 [lnum] = "";
-					return txd;
-				case 3:
-					do{
-						lnum = Random.Range (0, POJITHIBU_3.Count);
-					}while(save_lnum == lnum);
-					save_lnum = lnum;
-
-					txd=POJITHIBU_3 [lnum];
-					POJITHIBU_3 [lnum] = "";
-					return txd;
-				}
+				do {
+					lnum = Random.Range (0, size [NEGATHIBU] [level - 1]);
+				} while(save_lnum == lnum);
+				save_lnum = lnum;
+				txd = All_text [NEGATHIBU] [level - 1] [lnum];
+				return txd;
+			} else {
+				do {
+					lnum = Random.Range (0, size [POJITHIBU] [level - 1]);
+				} while(save_lnum == lnum);
+				save_lnum = lnum;
+				txd = All_text [POJITHIBU] [level - 1] [lnum];
+				return txd;
 			}
 			break;
 
-			//デザインか実用性か
+		//デザインか実用性か
 		case DEZAIN:
 			if (Get_result.useful) {
-				switch(level){
-				case 1:
-					do{
-						lnum = Random.Range (0, ZITUYOUTEKI_1.Count);
-					}while(save_lnum == lnum);
-					save_lnum = lnum;
-
-					txd=ZITUYOUTEKI_1 [lnum];
-					ZITUYOUTEKI_1 [lnum] = "";
-					return txd;
-				case 2:
-					do{
-						lnum = Random.Range (0, ZITUYOUTEKI_2.Count);
-					}while(save_lnum == lnum);
-					save_lnum = lnum;
-
-					txd=ZITUYOUTEKI_2 [lnum];
-					ZITUYOUTEKI_2 [lnum] = "";
-					return txd;
-				case 3:
-					do{
-						lnum = Random.Range (0, ZITUYOUTEKI_3.Count);
-					}while(save_lnum == lnum);
-					save_lnum = lnum;
-
-					txd=ZITUYOUTEKI_3 [lnum];
-					ZITUYOUTEKI_3 [lnum] = "";
-					return txd;
-				}
+				do {
+					lnum = Random.Range (0, size [DEZAIN] [level - 1]);
+				} while(save_lnum == lnum);
+				save_lnum = lnum;
+				txd = All_text [DEZAIN] [level - 1] [lnum];
+				return txd;
+			} else {
+				do {
+					lnum = Random.Range (0, size [ZITUYOUTEKI] [level - 1]);
+				} while(save_lnum == lnum);
+				save_lnum = lnum;
+				txd = All_text [ZITUYOUTEKI] [level - 1] [lnum];
+				return txd;
+				break;
 			}
-			else {
-				switch(level){
-				case 1:
-					do{
-						lnum = Random.Range (0, DEZAIN_1.Count);
-					}while(save_lnum == lnum);
-					save_lnum = lnum;
-
-					txd=DEZAIN_1 [lnum];
-					DEZAIN_1 [lnum] = "";
-					return txd;
-				case 2:
-					do{
-						lnum = Random.Range (0, DEZAIN_2.Count);
-					}while(save_lnum == lnum);
-					save_lnum = lnum;
-
-					txd=DEZAIN_2 [lnum];
-					DEZAIN_2 [lnum] = "";
-					return txd;
-				case 3:
-					do{
-						lnum = Random.Range (0, DEZAIN_3.Count);
-					}while(save_lnum == lnum);
-					save_lnum = lnum;
-
-					txd=DEZAIN_3 [lnum];
-					DEZAIN_3 [lnum] = "";
-					return txd;
-				}
-			}
-			break;
 		}
-		return "unko";
-	}*/
+		return "error";
+	}
 
 }
