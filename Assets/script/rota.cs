@@ -6,8 +6,15 @@ using UnityEngine.SceneManagement;
 public class rota : MonoBehaviour {
 	int speed;
 	float time;
+	GameObject object_all;
+	GameObject canvas;
+
 	// Use this for initialization
 	void Start () {
+		object_all = GameObject.Find ("unko");
+		canvas = GameObject.Find ("Canvas");
+		object_all.SetActive (false);
+		canvas.SetActive (false);
 		speed = -15;
 		time = 0f;
 
@@ -19,6 +26,8 @@ public class rota : MonoBehaviour {
 		time+=Time.deltaTime;
 		if(time>=1f){
 			SceneManager.LoadScene ("y_task");
+			canvas.SetActive (true);
+			object_all.SetActive (true);
 		}
 	}
 }

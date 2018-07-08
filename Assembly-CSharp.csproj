@@ -57,6 +57,7 @@
      <Compile Include="Assets\script\scene_jump_start.cs" />
      <Compile Include="Assets\yoha\title\y_lib.cs" />
      <Compile Include="Assets\yoha\title\y_title.cs" />
+     <Compile Include="Assets\yoha\y_Canvas.cs" />
      <Compile Include="Assets\yoha\y_pickup.cs" />
      <Compile Include="Assets\yoha\y_pickup_2.cs" />
      <None Include="Assets\Resources\CSV\functionlike1.txt" />

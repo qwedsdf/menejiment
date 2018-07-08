@@ -37,24 +37,32 @@ public class y_pickup_2 : MonoBehaviour {
 
 	List<List<int>> size = new List<List<int>>();
 
-
+	static public bool once=false;
 	int num;
 	static public int save_num;
 	static public int save_lnum;
 	int level;
 	public Color ija;
 
+
 	// Use this for initialization
 	void Start () {
-		
+		if (!once) {
+			DontDestroyOnLoad (this);
+			once = true;
+		}
+		else {
+			Destroy (this.gameObject);
+		}
 	}
 
 	void OnEnable(){
+		Debug.Log ("通ってる");
 		format ();
 	}
 
 	void format(){
-		Input_text ();
+		if(!once)Input_text ();
 		Instantiate (back [Get_result.relation], new Vector2 (0, 1.5f), Quaternion.identity);
 		Instantiate (coment [Get_result.relation], new Vector2 (0, -0.5f), Quaternion.identity);
 		GameObject.Find ("dis").GetComponent<Text> ().text = distance [Get_result.relation];
@@ -74,6 +82,7 @@ public class y_pickup_2 : MonoBehaviour {
 		else level = 3;
 
 		string txt;
+		tack.GetComponent<Text> ().text = "";
 		if (Get_result.relation!=10) {
 			do {
 				txt = SetPos ();
@@ -83,7 +92,7 @@ public class y_pickup_2 : MonoBehaviour {
 		else {
 			txt = "告白をしよう";
 		}
-		tack.GetComponent<Text> ().text = tack.GetComponent<Text> ().text + txt;
+		tack.GetComponent<Text> ().text += txt;
 	}
 
 	// Update is called once per frame
@@ -93,6 +102,7 @@ public class y_pickup_2 : MonoBehaviour {
 
 	//テキスト読み込みは確認ずみ
 	void Input_text(){
+		Debug.Log ("通ってる");
 		foreach(string name in file_name){
 			Load_Text (name, ref All_text);
 		}
@@ -147,19 +157,20 @@ public class y_pickup_2 : MonoBehaviour {
 
 	//やったを押した場合
 	public void push_yes(){
-
 		Get_result.relation++;
-		//DontDestroyOnLoad (GameObject.Find("unko"));
 		if (Get_result.relation == 11) {
 			last_tap.Play ();
 			StartCoroutine (lChecking (() => {
-				SceneManager.LoadScene ("title");
+				SceneManager.LoadScene ("y_title");
+				Destroy(this.gameObject);
+				Destroy(GameObject.Find("Canvas").gameObject);
+				once=false;
 			}));
 		}
 		else {
 			o ();
 			StartCoroutine(Checking( ()=>{
-				SceneManager.LoadScene ("load");
+				SceneManager.LoadScene ("y_load");
 			} ));
 		}
 	}
@@ -168,7 +179,7 @@ public class y_pickup_2 : MonoBehaviour {
 	public void push_no(){
 		o ();
 		StartCoroutine(Checking( ()=>{
-			SceneManager.LoadScene ("load");
+			SceneManager.LoadScene ("y_load");
 		} ));
 	}
 
@@ -200,13 +211,13 @@ public class y_pickup_2 : MonoBehaviour {
 		string txd;
 		if (level == 0) {
 			do {
-				Debug.Log (size [SITASIKUNAI] [0]);
 				lnum = Random.Range (0, size [SITASIKUNAI] [0]);
 			} while(save_lnum == lnum);
 			save_lnum = lnum;
 			txd = All_text [SITASIKUNAI] [0] [lnum];
 			return txd;
 		}
+
 		switch (num) {
 		//インドアかアウトドアか
 		case INDOOR:
