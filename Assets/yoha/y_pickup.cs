@@ -130,7 +130,7 @@ public class y_pickup : MonoBehaviour {
 		if (Get_result.relation == 11) {
 			last_tap.Play ();
 			StartCoroutine (lChecking (() => {
-				SceneManager.LoadScene ("title");
+				SceneManager.LoadScene ("y_title");
 			}));
 		}
 		else {

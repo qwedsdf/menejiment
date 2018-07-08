@@ -54,6 +54,7 @@ public class y_pickup_2 : MonoBehaviour {
 	}
 
 	void format(){
+		Input_text ();
 		Instantiate (back [Get_result.relation], new Vector2 (0, 1.5f), Quaternion.identity);
 		Instantiate (coment [Get_result.relation], new Vector2 (0, -0.5f), Quaternion.identity);
 		GameObject.Find ("dis").GetComponent<Text> ().text = distance [Get_result.relation];
@@ -82,9 +83,7 @@ public class y_pickup_2 : MonoBehaviour {
 		else {
 			txt = "告白をしよう";
 		}
-
 		tack.GetComponent<Text> ().text = tack.GetComponent<Text> ().text + txt;
-		Input_text ();
 	}
 
 	// Update is called once per frame
@@ -136,6 +135,7 @@ public class y_pickup_2 : MonoBehaviour {
 					text += moji;
 				}
 			}
+
 		}
 		size.Add (_size);
 		all_text_box.Add (text_box);
@@ -200,7 +200,8 @@ public class y_pickup_2 : MonoBehaviour {
 		string txd;
 		if (level == 0) {
 			do {
-				lnum = Random.Range (0, 0);
+				Debug.Log (size [SITASIKUNAI] [0]);
+				lnum = Random.Range (0, size [SITASIKUNAI] [0]);
 			} while(save_lnum == lnum);
 			save_lnum = lnum;
 			txd = All_text [SITASIKUNAI] [0] [lnum];

@@ -1048,7 +1048,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1980257463}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4d98b0eb44cf62943852b3e1483ac308, type: 3}
   m_Name: 
@@ -1228,17 +1228,17 @@ MonoBehaviour:
   - {fileID: 1199567402996772, guid: e631f1f16a2daec4683b13ad21695589, type: 2}
   - {fileID: 1669221819183638, guid: 3188c4c6d96e5cc41a918c832fa5c3cc, type: 2}
   distance:
-  - a
-  - a
-  - a
-  - a
-  - a
-  - a
-  - a
-  - a
-  - a
-  - a
-  - a
+  - "130\u5104\u5149\u5E74"
+  - "10\u4E07\u5149\u5E74\uFF08\u9280\u6CB3\u7CFB\u306E\u76F4\u5F84\uFF09"
+  - "\u76F8\u624B\u304C\u5973\u6027\u306E\u5834\u5408\u219225\u5149\u5E74\uFF08\u7E54\u59EB\u661F\uFF09"
+  - "45\u5146km\uFF08\u592A\u967D\u7CFB\u306E\u534A\u5F84\uFF09"
+  - "140\u4E07km\uFF08\u592A\u967D\u306E\u76F4\u5F84\uFF09"
+  - "30\u4E07km\uFF08\u5149\u304C1\u79D2\u3067\u9032\u3080\u8DDD\u96E2\uFF09"
+  - "13000km\uFF08\u5730\u7403\u306E\u76F4\u5F84\uFF09"
+  - "3000km\uFF08\u65E5\u672C\u5217\u5CF6\u306E\u9577\u3055\uFF09"
+  - "42,195km\uFF08\u30D5\u30EB\u30DE\u30E9\u30BD\u30F3\uFF09"
+  - "634m\uFF08\u30B9\u30AB\u30A4\u30C4\u30EA\u30FC\uFF09"
+  - "1m\uFF08\u624B\u3092\u4F38\u3070\u305B\u3070\u5C4A\u304F\u8DDD\u96E2\uFF09"
   coment:
   - {fileID: 1228191955588782, guid: 1b0a5879ebfc8114394514abc8a690ff, type: 2}
   - {fileID: 1591831689111534, guid: 15451cdf5ee913c408a63cea53718c7c, type: 2}
