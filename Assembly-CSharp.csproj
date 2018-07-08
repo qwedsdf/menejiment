@@ -60,6 +60,7 @@
      <Compile Include="Assets\yoha\y_Canvas.cs" />
      <Compile Include="Assets\yoha\y_pickup.cs" />
      <Compile Include="Assets\yoha\y_pickup_2.cs" />
+     <Compile Include="Assets\yoha\y_setActive.cs" />
      <None Include="Assets\Resources\CSV\functionlike1.txt" />
      <None Include="Assets\Resources\CSV\indoor1.txt" />
      <None Include="Assets\Resources\CSV\nofrends0.txt" />

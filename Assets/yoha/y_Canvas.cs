@@ -3,22 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class y_Canvas : MonoBehaviour {
-	static public bool flg = false;
+	static public y_Canvas instans;
 
 	// Use this for initialization
 	void Start () {
-		if (!flg)
+		if (instans==null)
 		{
+			instans = this;
 			DontDestroyOnLoad(this);
-			flg = true;
 		}
 		else {
 			Destroy (this.gameObject);
 		}
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
 }

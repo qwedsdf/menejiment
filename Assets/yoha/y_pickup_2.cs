@@ -44,25 +44,33 @@ public class y_pickup_2 : MonoBehaviour {
 	int level;
 	public Color ija;
 
+	static public y_pickup_2 instance;
 
-	// Use this for initialization
-	void Start () {
-		if (!once) {
+	void Awake(){
+		if (instance==null) {
+			instance = this;
+			Input_text ();
 			DontDestroyOnLoad (this);
 			once = true;
 		}
-		else {
+		else{
+			Input_text ();
 			Destroy (this.gameObject);
+			return;
 		}
 	}
 
+	// Use this for initialization
+	void Start () {
+		
+	}
+
 	void OnEnable(){
-		Debug.Log ("通ってる");
 		format ();
+		Instantiate (back [Get_result.relation], new Vector2 (0, 1.5f), Quaternion.identity);
 	}
 
 	void format(){
-		if(!once)Input_text ();
 		Instantiate (back [Get_result.relation], new Vector2 (0, 1.5f), Quaternion.identity);
 		Instantiate (coment [Get_result.relation], new Vector2 (0, -0.5f), Quaternion.identity);
 		GameObject.Find ("dis").GetComponent<Text> ().text = distance [Get_result.relation];
@@ -102,7 +110,6 @@ public class y_pickup_2 : MonoBehaviour {
 
 	//テキスト読み込みは確認ずみ
 	void Input_text(){
-		Debug.Log ("通ってる");
 		foreach(string name in file_name){
 			Load_Text (name, ref All_text);
 		}
